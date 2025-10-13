@@ -1,0 +1,26 @@
+{
+  "accountAssociation": {
+    "header": "farcaster-account-association",
+    "payload": "your-account-association-payload"
+  },
+  "frame": {
+    "version": "vNext",
+    "name": "Eco Quiz",
+    "iconUrl": "https://your-domain.com/icon.png",
+    "homeUrl": "https://your-domain.com",
+    "imageUrl": "https://your-domain.com/frame-image.png",
+    "button": {
+      "title": "Start Eco Quiz",
+      "action": {
+        "type": "launch_frame",
+        "name": "Eco Quiz",
+        "url": "https://your-domain.com",
+        "splashImageUrl": "https://your-domain.com/splash.png",
+        "splashBackgroundColor": "#22c55e"
+      }
+    },
+    "splashImageUrl": "https://your-domain.com/splash.png",
+    "splashBackgroundColor": "#22c55e",
+    "webhookUrl": "https://your-domain.com/api/webhook"
+  }
+}

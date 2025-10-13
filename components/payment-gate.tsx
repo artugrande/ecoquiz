@@ -4,8 +4,9 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, Wallet, AlertCircle, CheckCircle2, ExternalLink } from 'lucide-react'
+import { Loader2, Wallet, AlertCircle, CheckCircle2, ExternalLink, LogOut, RefreshCw } from 'lucide-react'
 import { usePayToRevealScore, PaymentState } from '@/hooks/use-pay-to-reveal-score'
+import { useAccount, useDisconnect, useConnectors } from 'wagmi'
 import { PAYMENT_AMOUNT, formatCeloAmount } from '@/lib/wagmi-config'
 
 interface PaymentGateProps {
@@ -27,6 +28,11 @@ export function PaymentGate({ onPaymentSuccess, onCancel }: PaymentGateProps) {
     isTransactionConfirmed,
   } = usePayToRevealScore()
 
+  // Additional wagmi hooks for wallet management
+  const { address, connector } = useAccount()
+  const { disconnect } = useDisconnect()
+  const connectors = useConnectors()
+
   // Handle payment success
   React.useEffect(() => {
     if (paymentState === 'success' && isTransactionConfirmed) {
@@ -42,6 +48,29 @@ export function PaymentGate({ onPaymentSuccess, onCancel }: PaymentGateProps) {
     }
   }
 
+  const handleDisconnect = () => {
+    disconnect()
+    resetPayment()
+  }
+
+  const handleConnectDifferentWallet = async () => {
+    disconnect()
+    resetPayment()
+    // Small delay to ensure disconnect is processed
+    setTimeout(() => {
+      connectWallet()
+    }, 100)
+  }
+
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`
+  }
+
+  const getConnectorName = (connector: any) => {
+    if (!connector) return 'Unknown'
+    return connector.name || connector.id || 'Wallet'
+  }
+
   const getButtonText = () => {
     switch (paymentState) {
       case 'connecting':
@@ -55,7 +84,10 @@ export function PaymentGate({ onPaymentSuccess, onCancel }: PaymentGateProps) {
       case 'success':
         return 'Payment Successful!'
       default:
-        return isConnected ? `Pay ${formatCeloAmount(PAYMENT_AMOUNT)} to See Score` : 'Connect Wallet & Pay'
+        if (isConnected) {
+          return `Pay ${formatCeloAmount(PAYMENT_AMOUNT)} to See Score`
+        }
+        return 'Connect Wallet & Pay'
     }
   }
 
@@ -94,16 +126,55 @@ export function PaymentGate({ onPaymentSuccess, onCancel }: PaymentGateProps) {
 
       {/* Connection Status */}
       {isConnected && (
-        <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-          <div className="flex items-center gap-2 text-green-700">
-            <CheckCircle2 className="w-4 h-4" />
-            <span className="text-sm font-medium">Wallet Connected</span>
+        <div className="p-4 bg-green-50 border border-green-200 rounded-lg space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-green-700">
+              <CheckCircle2 className="w-4 h-4" />
+              <span className="text-sm font-medium">Wallet Connected</span>
+            </div>
+            <Button
+              onClick={handleDisconnect}
+              variant="ghost"
+              size="sm"
+              className="h-8 px-2 text-green-600 hover:text-green-800"
+            >
+              <LogOut className="w-3 h-3" />
+            </Button>
           </div>
-          {!isCorrectChain && (
-            <p className="text-xs text-green-600 mt-1">
-              Switching to CELO network...
-            </p>
-          )}
+          
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-green-600">Wallet:</span>
+              <span className="font-medium text-green-800">
+                {getConnectorName(connector)}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-green-600">Address:</span>
+              <span className="font-mono text-green-800">
+                {address ? formatAddress(address) : 'N/A'}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-green-600">Network:</span>
+              <span className="font-medium text-green-800">
+                {isCorrectChain ? 'CELO' : 'Switching...'}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <Button
+              onClick={handleConnectDifferentWallet}
+              variant="outline"
+              size="sm"
+              className="flex-1 text-xs"
+              disabled={paymentState === 'sending' || paymentState === 'confirming'}
+            >
+              <RefreshCw className="w-3 h-3 mr-1" />
+              Change Wallet
+            </Button>
+          </div>
         </div>
       )}
 
@@ -180,6 +251,12 @@ export function PaymentGate({ onPaymentSuccess, onCancel }: PaymentGateProps) {
           >
             Try Again
           </Button>
+        )}
+
+        {!isConnected && (
+          <div className="text-xs text-muted-foreground text-center">
+            Connect your wallet to pay {formatCeloAmount(PAYMENT_AMOUNT)} and see your eco score
+          </div>
         )}
 
         {onCancel && paymentState !== 'success' && (

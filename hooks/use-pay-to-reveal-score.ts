@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { useAccount, useSendTransaction, useWaitForTransactionReceipt, useChainId, useSwitchChain } from 'wagmi'
+import { useAccount, useSendTransaction, useWaitForTransactionReceipt, useChainId, useSwitchChain, useConnect } from 'wagmi'
 import { parseEther } from 'viem'
 import { celo, celoAlfajores } from 'wagmi/chains'
 import { PAYMENT_RECIPIENT, PAYMENT_AMOUNT, celoChains } from '@/lib/wagmi-config'
@@ -46,6 +46,7 @@ export function usePayToRevealScore(): UsePayToRevealScoreReturn {
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
   const { switchChain } = useSwitchChain()
+  const { connect, connectors } = useConnect()
   
   const { sendTransaction, data: sendData, error: sendError, isPending: isSending } = useSendTransaction()
   const { 
@@ -72,20 +73,53 @@ export function usePayToRevealScore(): UsePayToRevealScoreReturn {
       setPaymentState('connecting')
       setError(null)
 
-      // In a Farcaster frame, the wallet should already be connected
-      // This function mainly handles chain switching if needed
-      if (!isConnected) {
-        throw new Error('Wallet not connected. Please connect your wallet first.')
-      }
-
-      setPaymentState('connected')
-
-      // Check if we need to switch chains
-      if (!isCorrectChain) {
-        setPaymentState('switching_chain')
-        await switchChain({ chainId: celo.id }) // Switch to CELO mainnet
+      // If already connected, just check chain
+      if (isConnected) {
         setPaymentState('connected')
+        
+        // Check if we need to switch chains
+        if (!isCorrectChain) {
+          setPaymentState('switching_chain')
+          await switchChain({ chainId: celo.id }) // Switch to CELO mainnet
+          setPaymentState('connected')
+        }
+        return
       }
+
+      // If not connected, try to connect
+      // First try Farcaster frame connector
+      const farcasterConnector = connectors.find(c => c.id === 'farcasterFrame' || c.name === 'Farcaster Frame')
+      if (farcasterConnector) {
+        await connect({ connector: farcasterConnector })
+        setPaymentState('connected')
+        
+        // Check if we need to switch chains
+        if (!isCorrectChain) {
+          setPaymentState('switching_chain')
+          await switchChain({ chainId: celo.id })
+          setPaymentState('connected')
+        }
+        return
+      }
+
+      // Fallback to injected connector (MetaMask, etc.)
+      const injectedConnector = connectors.find(c => c.id === 'injected' || c.name === 'Injected')
+      if (injectedConnector) {
+        await connect({ connector: injectedConnector })
+        setPaymentState('connected')
+        
+        // Check if we need to switch chains
+        if (!isCorrectChain) {
+          setPaymentState('switching_chain')
+          await switchChain({ chainId: celo.id })
+          setPaymentState('connected')
+        }
+        return
+      }
+
+      // If no suitable connector found
+      throw new Error('No suitable wallet connector found. Please install a compatible wallet.')
+
     } catch (err: any) {
       setPaymentState('error')
       setError({
@@ -93,7 +127,7 @@ export function usePayToRevealScore(): UsePayToRevealScoreReturn {
         message: err.message || 'Failed to connect wallet'
       })
     }
-  }, [isConnected, isCorrectChain, switchChain])
+  }, [isConnected, isCorrectChain, switchChain, connect, connectors])
 
   // Send payment transaction
   const sendPayment = useCallback(async () => {

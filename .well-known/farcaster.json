@@ -6,21 +6,21 @@
   "frame": {
     "version": "vNext",
     "name": "Eco Quiz",
-    "iconUrl": "https://your-domain.com/icon.png",
-    "homeUrl": "https://your-domain.com",
-    "imageUrl": "https://your-domain.com/frame-image.png",
+    "iconUrl": "https://ecoquiz-henna.vercel.app/icon.png",
+    "homeUrl": "https://ecoquiz-henna.vercel.app/",
+    "imageUrl": "https://ecoquiz-henna.vercel.app/frame-image.png",
     "button": {
       "title": "Start Eco Quiz",
       "action": {
         "type": "launch_frame",
         "name": "Eco Quiz",
-        "url": "https://your-domain.com",
-        "splashImageUrl": "https://your-domain.com/splash.png",
+        "url": "https://ecoquiz-henna.vercel.app/",
+        "splashImageUrl": "https://ecoquiz-henna.vercel.app/splash.png",
         "splashBackgroundColor": "#22c55e"
       }
     },
-    "splashImageUrl": "https://your-domain.com/splash.png",
+    "splashImageUrl": "https://ecoquiz-henna.vercel.app/splash.png",
     "splashBackgroundColor": "#22c55e",
-    "webhookUrl": "https://your-domain.com/api/webhook"
+    "webhookUrl": "https://ecoquiz-henna.vercel.app/api/webhook"
   }
 }

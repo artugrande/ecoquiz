@@ -4,7 +4,7 @@ export async function GET() {
   const manifest = {
     frame: {
       name: "EcoQuiz",
-      version: "1",
+      version: "1.1",
       iconUrl: "https://ecoquiz-henna.vercel.app/icon.png",
       homeUrl: "https://ecoquiz-henna.vercel.app",
       splashImageUrl: "https://ecoquiz-henna.vercel.app/splash.png",

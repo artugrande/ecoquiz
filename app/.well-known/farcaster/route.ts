@@ -8,7 +8,7 @@ export async function GET() {
       signature: "M4KKdVMJv8voCxebv9E1g4F7vOsbmIE3JB+QzQcUX7Jaj7yknkHDmAQcFPk30YGoQvcyYJLkVmSqtIpv8+bzoBw="
     },
     frame: {
-      version: "1",
+      version: "1.1",
       name: "EcoQuiz",
       iconUrl: "https://ecoquiz-henna.vercel.app/icon.png",
       homeUrl: "https://ecoquiz-henna.vercel.app",

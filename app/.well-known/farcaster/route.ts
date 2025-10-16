@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   const manifest = {
     accountAssociation: {
-      header: "eyJmaWQiOjEyMTUyLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MEJGNDVGOTY3RTkwZmZENjA2MzVkMUFDMTk1MDYyYTNBOUZjQzYyQiJ9",
-      payload: "eyJkb21haW4iOiJlY29xdWl6LWhlbm5hLnZlcmNlbC5hcHAifQ==",
-      signature: "MHhmMTUwMWRjZjRhM2U1NWE1ZjViNGQ5M2JlNGIxYjZiOGE0ZjcwYWQ5YTE1OTNmNDk1NzllNTA2YjJkZGZjYTBlMzI4ZmRiNDZmNmVjZmFhZTU4NjYwYzBiZDc4YjgzMzc2MDAzYTkxNzhkZGIyZGIyZmM5ZDYwYjU2YTlmYzdmMDFj"
+      header: "eyJmaWQiOjEzNzgwNTMsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhmRGNERUI1NjJCQWZlZUVFNmQ2OWQ1ZTkwMWY3RTEwNzZjMTc2MDY3In0",
+      payload: "eyJkb21haW4iOiJlY29xdWl6LWhlbm5hLnZlcmNlbC5hcHAifQ",
+      signature: "M4KKdVMJv8voCxebv9E1g4F7vOsbmIE3JB+QzQcUX7Jaj7yknkHDmAQcFPk30YGoQvcyYJLkVmSqtIpv8+bzoBw="
     },
     frame: {
       version: "1",

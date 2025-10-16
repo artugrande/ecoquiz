@@ -1,0 +1,13 @@
+{
+  "frame": {
+    "name": "EcoQuiz",
+    "version": "1",
+    "iconUrl": "https://i.imgur.com/wt0coaO.png",
+    "homeUrl": "https://ecoquiz-henna.vercel.app/",
+    "subtitle": "Learn and care for the planet while you play",
+    "description": "EcoQuiz is an educational app that blends fun and environmental awareness. Answer quizzes about ecology, sustainability, and climate change — earn points and discover how your actions can make a positive impact on the world. 🌱✨",
+    "primaryCategory": "education",
+    "splashBackgroundColor": "#2E7D32",
+    "splashImageUrl": "blob:https://imgur.com/d76a85b1-c324-4a26-8486-2a4ff78f6421"
+  }
+}

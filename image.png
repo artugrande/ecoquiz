@@ -1,0 +1,58 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Main content area -->
+  <g transform="translate(600, 315)">
+    <!-- Logo area -->
+    <g transform="translate(-200, -100)">
+      <!-- Speech bubble -->
+      <path d="M 50 50 L 300 50 Q 350 50 350 100 L 350 200 Q 350 250 300 250 L 50 250 Q 0 250 0 200 L 0 100 Q 0 50 50 50 Z" 
+            fill="white" stroke="none"/>
+      
+      <!-- Tail -->
+      <path d="M 50 250 L 100 320 L 150 250 Z" fill="white"/>
+      
+      <!-- Leaf icon -->
+      <g transform="translate(175, 90)">
+        <path d="M 0 -25 Q -20 -40 -25 -20 Q -20 0 -10 15 Q 10 30 20 15 Q 25 0 20 -20 Q 15 -40 0 -25 Z" 
+              fill="white" stroke="none"/>
+        <line x1="0" y1="-25" x2="0" y2="15" stroke="white" stroke-width="4"/>
+        <path d="M -8 0 Q 0 -8 8 0" stroke="white" stroke-width="3" fill="none"/>
+      </g>
+      
+      <!-- ECO QUIZ text -->
+      <text x="175" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="white">ECO QUIZ</text>
+    </g>
+    
+    <!-- Subtitle -->
+    <text x="0" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="white" opacity="0.9">
+      Learn and care for the planet while you play
+    </text>
+    
+    <!-- Description -->
+    <text x="0" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="white" opacity="0.8">
+      Test your environmental awareness with interactive quizzes
+    </text>
+    
+    <!-- Decorative elements -->
+    <g transform="translate(-400, -200)">
+      <circle cx="0" cy="0" r="30" fill="white" opacity="0.1"/>
+      <circle cx="50" cy="20" r="20" fill="white" opacity="0.1"/>
+      <circle cx="100" cy="-10" r="25" fill="white" opacity="0.1"/>
+    </g>
+    
+    <g transform="translate(400, 200)">
+      <circle cx="0" cy="0" r="25" fill="white" opacity="0.1"/>
+      <circle cx="-50" cy="30" r="20" fill="white" opacity="0.1"/>
+      <circle cx="-100" cy="-20" r="30" fill="white" opacity="0.1"/>
+    </g>
+  </g>
+</svg>

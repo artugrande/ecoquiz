@@ -1,0 +1,81 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="800" height="300" fill="url(#skyGradient)"/>
+  
+  <!-- Cloud -->
+  <g transform="translate(100, 60)">
+    <ellipse cx="0" cy="0" rx="50" ry="30" fill="white" opacity="0.9"/>
+    <ellipse cx="40" cy="-10" rx="40" ry="24" fill="white" opacity="0.9"/>
+    <ellipse cx="70" cy="0" rx="30" ry="20" fill="white" opacity="0.9"/>
+  </g>
+  
+  <!-- Hills -->
+  <path d="M 0 300 Q 200 240 400 280 Q 600 320 800 300 L 800 600 L 0 600 Z" fill="url(#hillGradient)"/>
+  
+  <!-- Tree on left -->
+  <g transform="translate(60, 200)">
+    <!-- Trunk -->
+    <rect x="-6" y="0" width="12" height="80" fill="#8B4513"/>
+    <!-- Leaves -->
+    <circle cx="0" cy="20" r="50" fill="#228B22"/>
+  </g>
+  
+  <!-- Cypress tree on right -->
+  <g transform="translate(700, 160)">
+    <!-- Trunk -->
+    <rect x="-4" y="0" width="8" height="120" fill="#654321"/>
+    <!-- Leaves -->
+    <ellipse cx="0" cy="40" rx="16" ry="80" fill="#006400"/>
+  </g>
+  
+  <!-- Foreground leaves -->
+  <g transform="translate(640, 400)">
+    <path d="M 0 0 Q -30 -40 -20 -80 Q -10 -100 10 -80 Q 20 -40 0 0 Z" fill="#32CD32"/>
+    <path d="M 20 0 Q -10 -30 0 -60 Q 10 -70 30 -60 Q 40 -30 20 0 Z" fill="#32CD32"/>
+  </g>
+  
+  <!-- Woman figure -->
+  <g transform="translate(300, 240)">
+    <!-- Head -->
+    <circle cx="0" cy="-60" r="24" fill="#FDBCB4"/>
+    <!-- Hair -->
+    <path d="M -30 -70 Q -40 -90 -20 -100 Q 0 -110 20 -100 Q 40 -90 30 -70 Q 24 -60 -30 -60 Z" fill="#8B4513"/>
+    <!-- Body -->
+    <rect x="-16" y="-30" width="32" height="50" fill="#DAA520"/>
+    <!-- Arms -->
+    <ellipse cx="-30" cy="-10" rx="8" ry="24" fill="#FDBCB4"/>
+    <ellipse cx="30" cy="-10" rx="8" ry="24" fill="#FDBCB4"/>
+    <!-- Phone -->
+    <rect x="16" y="-16" width="12" height="24" fill="#000000" rx="2"/>
+    <rect x="18" y="-12" width="8" height="16" fill="#333333"/>
+  </g>
+  
+  <!-- Speech bubble -->
+  <g transform="translate(400, 160)">
+    <!-- Main bubble -->
+    <ellipse cx="0" cy="0" rx="120" ry="70" fill="#90EE90"/>
+    <!-- Tail -->
+    <path d="M -80 70 L -40 140 L -20 70 Z" fill="#90EE90"/>
+    
+    <!-- Leaf with question mark -->
+    <g transform="translate(0, -20)">
+      <path d="M 0 -16 Q -12 -24 -16 -12 Q -12 0 -4 8 Q 4 16 12 8 Q 16 0 12 -12 Q 8 -24 0 -16 Z" 
+            fill="#006400" stroke="none"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">?</text>
+    </g>
+    
+    <!-- ECO QUIZ text -->
+    <text x="0" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#006400">ECO QUIZ</text>
+  </g>
+</svg>
